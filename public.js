@@ -80,9 +80,3 @@ function scrollTop(num){
 		return document.body.scrollTop=num;
 	}
 }
-
-
-//hahahahahahahhaaaaaaavgsdzagv
-
-
-
