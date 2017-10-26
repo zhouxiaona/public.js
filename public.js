@@ -81,6 +81,32 @@ function scrollTop(num){
 	}
 }
 
+/*******************************
+基于火狐浏览器和非火狐浏览器的鼠标滚轮事件的兼容函数
+****** 　
+****** 
+********************************/
+function mousewheel(obj,fn){
+	var res=window.navigator.userAgent.indexOf("Firefox");
+	if(res==-1){//非火狐
+		addEvent(obj,"mousewheel",wheel);
+	}else{//火狐
+		addEvent(obj,"DOMMouseScroll",wheel);
+	}
+	function wheel(ev){
+		var evObj=window.event || ev;
+		var down=true;
+		if(ev.preventDefault){
+			ev.preventDefault();
+		}
+		if(ev.detail){
+			down=ev.detail<0;
+		}else{
+			down=ev.wheelDelta>0;
+		}
+		fn.apply(obj,[down,ev]);
+	}
+}
 
 
 
