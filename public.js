@@ -108,5 +108,18 @@ function mousewheel(obj,fn){
 	}
 }
 
-
+/*******************************
+查找cookie值的方法
+****** 　
+****** key是带引号的cookie键
+********************************/
+function getCookie(key){
+	var arr=document.cookie.split("; ");
+	for(index in arr){
+		var resArr=arr[index].split("=");
+		if(resArr[0]==key){
+			return resArr[1];
+		}
+	}
+}
 
