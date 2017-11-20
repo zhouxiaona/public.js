@@ -135,3 +135,14 @@ function getCookie(key){
 	var val=str.substring(start,end);
 	return val;
 }
+/*******************************
+设置cookie值封装的方法
+****** 　
+****** key是带引号的cookie键
+********************************/
+function setCookie(key,value,path,expires){
+	var current_data=new Date();
+	current_data.setDate(current_data.getDate()+expires);
+	var expires_str=current_data.toGMTString();
+	document.cookie=key+"="+value+";path="+path+";expires="+expires_str;
+}
