@@ -122,4 +122,16 @@ function getCookie(key){
 		}
 	}
 }
-
+/*******************************
+查找cookie值第二种封装的方法
+****** 　
+****** key是带引号的cookie键
+********************************/
+function getCookie(key){
+	var str=document.cookie;
+	var len=key.length+1;
+	var start=str.indexOf(key)+len;
+	var end=str.indexOf(";",start)==-1?str.length:str.indexOf(";",start);
+	var val=str.substring(start,end);
+	return val;
+}
