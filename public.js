@@ -81,6 +81,7 @@ function scrollTop(num){
 	}
 }
 
+
 /*******************************
 基于火狐浏览器和非火狐浏览器的鼠标滚轮事件的兼容函数
 ****** 　
@@ -122,6 +123,8 @@ function getCookie(key){
 		}
 	}
 }
+
+
 /*******************************
 查找cookie值第二种封装的方法
 ****** 　
@@ -135,6 +138,8 @@ function getCookie(key){
 	var val=str.substring(start,end);
 	return val;
 }
+
+
 /*******************************
 设置cookie值封装的方法
 ****** 　
