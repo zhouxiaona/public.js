@@ -1,2 +1,15 @@
-# public.js
-### js基础封装的函数,包括添加事件/取消事件/鼠标滚轮事件的兼容处理函数等等,持续更新...
+# 🎩 public.js
+## Usage
+First:
+`<script src="./path/public.js"></script>`
+Second:
+`for example:`
+```bash
+	//可以调用里面的方法
+	var btn=document.getElmentById("btn");
+	addEvent("btn","click",func);
+	function func(){
+		//code;
+	}
+```
+
