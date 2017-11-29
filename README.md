@@ -2,6 +2,7 @@
 ## Usage
 First:
 `<script src="./path/public.js"></script>`
+
 Second:
 `for example:`
 ```bash
