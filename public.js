@@ -75,11 +75,12 @@ function getStyle(element,key){
 ********************************/
 function scrollTop(num){
 	if(document.documentEleemnt.scrollTop){
-		return document.documentEleemnt.scrollTop=num;
+		return document.documentElement.scrollTop=num;
 	}else{
 		return document.body.scrollTop=num;
 	}
 }
+
 
 
 /*******************************
@@ -109,6 +110,9 @@ function mousewheel(obj,fn){
 	}
 }
 
+
+
+
 /*******************************
 查找cookie值的方法
 ****** 　
@@ -123,8 +127,11 @@ function getCookie(key){
 		}
 	}
 }
+
+
+
 /*******************************
-查找cookie值第二种封装的方法
+查找cookie值第二种封装的方法(PHP)
 ****** 　
 ****** key是带引号的cookie键
 ********************************/
@@ -136,8 +143,11 @@ function getCookie2(key){
 	var val=str.substring(start,end);
 	return val;
 }
+
+
+
 /*******************************
-查找父页面中传过来的参数
+页面跳转中查找父页面中传过来的参数
 ****** 　
 ****** name是带引号的参数名
 ********************************/
@@ -151,14 +161,27 @@ function GetQueryString(name){
      } 
 }
 
-/* 设置cookie */
-function setCookie3(key,val,time){//设置cookie方法
+
+
+/*******************************
+设置cookie值，时间戳,与getCookie3()配套使用
+****** 　
+****** 
+********************************/
+function setCookie(key,val,time){
 	var date=new Date(); //获取当前时间
 	var expiresDays=time;  //将date设置为n天以后的时间
 	date.setTime(date.getTime()+expiresDays*24*3600*1000); //格式化为cookie识别的时间
 	document.cookie=key + "=" + val +";expires="+date.toGMTString();  //设置cookie
 }
-function getCookie3(key){//获取cookie方法
+
+
+/*******************************
+获取cookie值
+****** 　与setCookie()配套使用
+****** key是带引号的cookie名
+********************************/
+function getCookie3(key){
 	/*获取cookie参数*/
 	var getCookie = document.cookie.replace(/[ ]/g,"");  //获取cookie，并且将获得的cookie格式化，去掉空格字符
 	var arrCookie = getCookie.split(";")  //将获得的cookie以"分号"为标识 将cookie保存到arrCookie的数组中
@@ -172,12 +195,24 @@ function getCookie3(key){//获取cookie方法
 	}
 	return tips;
 }
+
+
+
+/*******************************
+手动删除cookie值
+****** 　
+****** 与setCookie()、getCookie3(key)配套使用
+********************************/
 function clearCookie(name) {  
     setCookie(name, "", -1);  
 } 
 
 
-// 判断输入框中的值是否为空或空格
+/*******************************
+判断input输入框中的值是否为空或空格
+****** 　
+****** 正则表达式
+********************************/
 function isNull(str){
 	var regu = "^[ ]+$";
 	var re = new RegExp(regu);
@@ -187,7 +222,13 @@ function isNull(str){
 		return true;
 	}
 }
-//判断电话号码的正则表达式
+
+
+/*******************************
+判断电话号码的正则表达式
+****** 　
+****** 正则表达式
+********************************/
 function checkMobile(phoneNum) {
 	if(!(/^1[3|4|5|8][0-9]\d{4,8}$/.test(phoneNum))) {
 		return false;
@@ -195,7 +236,13 @@ function checkMobile(phoneNum) {
 		return true;
 	}
 }
-//判断固定电话格式的正则表达式函数
+
+
+/*******************************
+判断固定电话格式的函数
+****** 　
+****** 
+********************************/
 function checkTel(tel) {
 	var arrNum = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
 	for(i in tel) {
@@ -205,3 +252,57 @@ function checkTel(tel) {
 	}
 	return true;
 }
+
+
+/*******************************
+判断DOM节点是否加载完成的兼容函数
+****** 　
+****** 如若加载完成,就执行fn函数
+********************************/
+function ready(fn){
+	//如果浏览器支持addEventListener就调用，否则用其他方法；
+	if(window.addEventListener){
+		window.addEventListener("DOMContentLoaded",fn,false);
+	}else{
+		//获取头部节点；
+		var head=document.getElementsByTagName("head")[0];
+		var myScript=document.createElement("script");
+		head.appendChild(myScript);
+		//监控script标签是否创建成功，如果创建成功就执行arg()函数
+		myScript.onreadystatechange=function(){
+			if(myScript.readyState=="complete"){
+				//script节点创建完成，执行fn()
+				fn();
+			}
+		}
+	}
+}
+
+
+
+
+/*******************************
+getElementsByClassName()方法IE9以下不支持
+****** 兼容函数　
+****** 返回查找的元素,obj为所要查找目标元素的父级
+********************************/
+function findClass(className,obj){
+	if(obj.getElementsByClassName){
+		//主流浏览器支持getElementByClassName函数
+		var eles=obj.getElementsByClassName(className);
+	}else{
+		//IE浏览器不支持
+		var tags=document.getElementsByTagName("*");
+		var eles=[];
+		for(var i=0;i<tags.length;i++){
+			var reg =new RegExp("\\b"+className+"\\b");
+			if(reg.test(tags[i].className)){
+				eles.push(tags[i]);
+			}
+		}
+	}
+	return eles;
+}
+
+
+
